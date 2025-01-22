@@ -14,7 +14,7 @@ def home():
 @app.route('/api', methods=["GET"])
 def apiAccess():
     names = request.args.getlist('name')
-    results = marks[marks['name'].isin(names)]
+    results = marks.set_index('name').loc[names]
     response_data = {"marks": results['marks'].tolist()}
     return jsonify(response_data)
 
